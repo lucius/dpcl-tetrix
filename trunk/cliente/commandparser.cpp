@@ -1,0 +1,24 @@
+#include "commandparser.h"
+
+CommandParser::CommandParser()
+{
+}
+
+CommandParser::~CommandParser()
+{
+
+}
+
+Command
+CommandParser::parse( QString _str )
+{
+    if ( _str == "/pronto" )
+    {
+        return PRONTO;
+    }
+    else if ( _str == "/!pronto" )
+    {
+        return N_PRONTO;
+    }
+    return CHAT;
+}

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/musicas" >
+        <file alias="/ken.mp3" >ken.mp3</file>
+    </qresource>
+</RCC>
