@@ -1,4 +1,4 @@
-#ifndef CLIENTE_H
+    #ifndef CLIENTE_H
 #define CLIENTE_H
 
 #include <QMap>
@@ -7,6 +7,7 @@
 #include <QProcess>
 #include <QFileInfo>
 #include <QHBoxLayout>
+#include <QSignalMapper>
 
 #include "../tabuleiro/tabuleiro.h"
 #include "../rede_cliente/tradutor.h"
@@ -48,6 +49,8 @@ public slots:
 
     void jogadorPronto(bool);
 
+    void daAzia(int);
+
     void
     incomingRotacionapeca(quint16);
 
@@ -63,6 +66,16 @@ public slots:
     void
     incomingMovimentaDireita(quint16);
 
+    void
+    incomingAziaFrenetica(quint16);
+
+    void
+    daAziaFrenetica(QString, QString);
+
+    void
+    levelMudou();
+
+
 protected slots:
 
     void
@@ -74,8 +87,8 @@ protected slots:
     void
     jogadorDown( quint16 );
 
-	void
-	jogadorOver( quint16 _id_jogador , quint16 _pontuacao);
+    void
+    jogadorOver( quint16 _id_jogador , quint16 _pontuacao);
 	
 protected:
 

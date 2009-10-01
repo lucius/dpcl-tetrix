@@ -20,5 +20,8 @@ CommandParser::parse( QString _str )
     {
         return N_PRONTO;
     }
+    else if( _str == "/azia_frenetica" ) {
+        return AZIA_FRENETICA;
+    }
     return CHAT;
 }

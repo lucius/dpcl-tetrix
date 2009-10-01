@@ -22,6 +22,9 @@ signals:
     void
     commPronto( bool );
 
+    void
+    aziaFrenetica();
+
 public slots:
 
     void

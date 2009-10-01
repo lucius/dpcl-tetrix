@@ -34,6 +34,8 @@ JanelaTelaChat::submitStr( )
         case N_PRONTO:
             emit this->commPronto(false);
             break;
+        case AZIA_FRENETICA:
+            emit this->aziaFrenetica();
     }
 }
 

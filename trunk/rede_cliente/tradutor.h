@@ -19,7 +19,8 @@ namespace Rede_Cliente
         BUTT,
         ENCA,
         OVER,
-        RANK
+        RANK,
+        AZIA
     };
 
     typedef struct {
@@ -63,6 +64,9 @@ namespace Rede_Cliente
 
         void
         chat(QString);
+
+        void
+        azia(quint16);
 
         void
         desce();
@@ -130,6 +134,9 @@ namespace Rede_Cliente
         chat(QString, QString);
 
         void
+        daAzia(quint16);
+
+        void
         conexaoEstabelecida();
 
         void
@@ -167,6 +174,7 @@ namespace Rede_Cliente
 
         void
         over(quint16, quint16);
+
 
     };
 }

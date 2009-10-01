@@ -3,6 +3,7 @@
 
 #include <QtGui/QWidget>
 #include <QKeyEvent>
+#include <QPushButton>
 
 #include "basicos.h"
 #include "pivo.h"
@@ -29,6 +30,11 @@ class Tabuleiro : public QWidget
         //todo;
         void
         clear() {}
+
+        void
+        aziado();
+
+        QPushButton * btn_azia;
 
     public slots:
         void
@@ -64,12 +70,24 @@ class Tabuleiro : public QWidget
         void
         desceTudo();
 
+        void
+        habilitaAzia(bool);
+
+        void
+        daAziaEmAlguem();
+
     signals:
         void
         encaixe( );
 
         void
         gameover( int pontuacao );
+
+        void
+        levelMudou( );
+
+        void
+        aziaEmAlguem();
 
     #if !defined(Q_MOC_RUN)
     private: // can only be emitted by TetrixBoard
@@ -81,8 +99,7 @@ class Tabuleiro : public QWidget
         void
         procuraLinhas( );
 
-        void
-        levelMudou( );
+
 
         void
         pontuacaoMudou( );
