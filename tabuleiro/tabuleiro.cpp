@@ -15,10 +15,15 @@ Tabuleiro::Tabuleiro(QString nome, QWidget *parent)
 
     this->ui->label_nome_jogador->setText(nome);
 
+
     this->timer = new QTimer(this);
     this->numeroPecasUtilizadas = 0;
     this->pontuacao = 0;
     this->level = 1;
+
+
+    //this->btn_azia = this->ui->btn_azia;
+    //this->btn_azia->hide();
 
     connect( this, SIGNAL(linhaCheia(Tab::XyView)),
              this, SLOT(apagaLinhaCheia(Tab::XyView)) );
@@ -29,8 +34,10 @@ Tabuleiro::Tabuleiro(QString nome, QWidget *parent)
     connect( this, SIGNAL(pontuacaoMudou()),
              this, SLOT(setPontuacao()) );
 
-    connect( this, SIGNAL(levelMudou()),
-             this, SLOT(setLevel()) );
+    connect(this, SIGNAL(levelMudou()),
+            this, SLOT(setLevel()));
+
+    connect(this->ui->btn_azia,SIGNAL(clicked()),this,SLOT(daAziaEmAlguem()));
 
     emit this->levelMudou( );
     emit this->pontuacaoMudou( );
@@ -157,7 +164,7 @@ Tabuleiro::desceLinhas( Tab::XyView _posicao )
 void
 Tabuleiro::setLevel( )
 {
-    this->ui->level->display( (int) this->level );
+    this->ui->level->display((int) this->level );
 }
 
 void
@@ -170,8 +177,14 @@ Tabuleiro::desce()
 void
 Tabuleiro::setPontuacao( )
 {
+    if((int) this->pontuacao > 0 && this->pontuacao % 20 == 0) {
+        ++this->level;
+        emit this->levelMudou();
+    }
     this->ui->pontuacao->display( (int) this->pontuacao );
 }
+
+
 
 void
 Tabuleiro::rotacionapeca( )
@@ -191,9 +204,9 @@ Tabuleiro::colidiu( )
 
         ++ numeroPecasUtilizadas;
 
-        if ( this->numeroPecasUtilizadas % 25 == 0 )
+        if ( this->numeroPecasUtilizadas % 2 == 0 )
         {
-            ++this->level;
+
             emit this->levelMudou( );
         }
 
@@ -313,4 +326,28 @@ Tabuleiro::checkGameOver( Tab::TipoPeca _novasPosicoes )
     }
 
     return false;
+}
+
+void
+Tabuleiro::habilitaAzia(bool ok) {
+    //this->ui->btn_azia->hide();
+    //this->ui->btn_azia->setDisabled(true);
+
+    if(1 || ok) {
+        this->ui->btn_azia->show();
+        this->ui->btn_azia->setDisabled(false);
+    }
+}
+
+
+void
+Tabuleiro::daAziaEmAlguem() {
+    emit this->aziaEmAlguem();
+}
+void
+Tabuleiro::aziado() {
+    qDebug() << "kralho mano fui aziado";
+    this->pontuacao = 100;
+    //emit pontuacaoMudou();
+    //emit this->pontuacaoMudou();
 }

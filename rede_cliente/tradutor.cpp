@@ -27,7 +27,17 @@ Tradutor::chat(QString _mensagem)
     _mensagem = "chat:" + this->idJogador + ";" + _mensagem;
     this->conexao->enviaDado(_mensagem);
 }
+void
+Tradutor::azia(quint16 _id)
+{
+    QString _mensagem;
+    _mensagem = "Esta dando um azia frenética em "+this->listaJogadores[_id];
+    this->chat(_mensagem);
 
+    _mensagem = QString("azia:" + this->idJogador + ";") + QString(_id);
+
+    this->conexao->enviaDado(_mensagem);
+}
 void
 Tradutor::conectar(QString _ipServidor, quint16 _portaServidor, QString _nomeJogador)
 {
@@ -243,6 +253,11 @@ Tradutor::incomingMessage(QString _mensagem)
             break;
         case RANK:
             this->getRank(_mensagem);
+            break;
+        case AZIA:
+            qDebug() << "tradutor da azia em " << traduzido.segundoInt;
+            emit this->daAzia(traduzido.segundoInt);
+            break;
         default:
             break;
         }
@@ -303,5 +318,15 @@ Tradutor::traduzir(QString _mensagem)
     {
         parseado.comando = RANK;
     }
+    else if (comando == "azia")
+    {
+        qDebug() << "traduze azia " << _mensagem;
+        parseado.comando = AZIA;
+        parseado.idJogador = this->getPrimeiroParametro(_mensagem);
+        parseado.segundoInt = this->getSegundoParametroInt(_mensagem);
+    }
+
     return parseado;
 }
+
+

@@ -32,6 +32,9 @@ Cliente::Cliente(QWidget* _parent) : QWidget(_parent)
     QObject::connect(this->tabuleiro_principal,SIGNAL(gameover(int)),
                      this, SLOT(gameOver(int)));
 
+    QObject::connect(this->tabuleiro_principal,SIGNAL(levelMudou()),
+                     this, SLOT(levelMudou()));
+
     QObject::connect(this->tabuleiro_principal, SIGNAL(encaixe()),
                      this->rede,SLOT(encaixe()));
 
@@ -126,6 +129,18 @@ Cliente::novoJogadorConectado( quint16 _id, QString _nome )
         QObject::connect(this->rede,SIGNAL(startjogo(quint16,quint16)),
                          novo_jogador_tabuleiro,SLOT(startjogo(quint16,quint16)));
 
+        QSignalMapper *signalMapper = new QSignalMapper(novo_jogador_tabuleiro);
+
+        QObject::connect(novo_jogador_tabuleiro,SIGNAL(aziaEmAlguem()),
+                     signalMapper, SLOT(map()));
+
+        qDebug() << "mapeia azia para id " << _id;
+
+        signalMapper->setMapping(novo_jogador_tabuleiro, 1);
+
+        QObject::connect(signalMapper,SIGNAL(mapped(int)),this,SLOT(daAzia(int)));
+
+
         novo_jogador_tabuleiro->show();
     }
 }
@@ -167,6 +182,11 @@ void
 Cliente::incomingMovimentaDireita( quint16 _id )
 {
     this->getTabuleiroById(_id)->movepeca(true);
+}
+void
+Cliente::incomingAziaFrenetica(quint16 _id ){
+    qDebug() << "da uma azia no maluco" << _id;
+    //this->getTabuleiroById(_id)->aziado();
 }
 
 void
@@ -298,6 +318,8 @@ Cliente::connectsIncommingDataFromNet()
     QObject::connect(this->rede,SIGNAL(movePecaEsquerda(quint16)),
                      this,SLOT(incomingMovimentaEsquerda(quint16)));
 
+    QObject::connect(this->rede,SIGNAL(daAzia(quint16)),this,SLOT(incomingAziaFrenetica(quint16)));
+
 }
 
 void
@@ -339,11 +361,16 @@ Cliente::telachatInit()
                this->janela_telachat,SLOT(incommingMensagem(QString,QString)));
 
     //QObject::connect(this->janela_telachat, SIGNAL(commPronto(bool)), this->rede,SLOT(start(bool)));
+
     QObject::connect(this->janela_telachat, SIGNAL(commPronto(bool)), this,SLOT(jogadorPronto(bool)));
 }
 
 
-
+void Cliente::daAzia(int _id) {
+    qDebug() << "da azia em novamente em " << _id;
+    quint16 _id2 = 2;
+    this->rede->azia(_id2);
+}
 void Cliente::jogadorPronto(bool pronto) {
     QString _mensagem;
 
@@ -384,7 +411,10 @@ Cliente::getTabuleiroById( quint16 _id)
         return this->outros_tabuleiros[_id];
     }
 }
-
+void
+Cliente::daAziaFrenetica(QString q, QString t) {
+    qDebug() << "DA UMA AZIA FRENETICA EM" << q << " de " <<t;
+}
 void
 Cliente::initTrilhaSonora()
 {
@@ -399,4 +429,11 @@ Cliente::initTrilhaSonora()
     media->play();
 
     QObject::connect(media,SIGNAL(finished()), media, SLOT(play()));*/
+}
+
+void
+Cliente::levelMudou() {
+    foreach(int i, this->outros_tabuleiros.keys()) {
+        this->outros_tabuleiros.value(i)->habilitaAzia(true);
+    }
 }

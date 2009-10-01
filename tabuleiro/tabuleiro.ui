@@ -100,7 +100,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Level:</string>
+     <string>Azias</string>
     </property>
     <property name="textFormat">
      <enum>Qt::AutoText</enum>
@@ -145,8 +145,8 @@
      <rect>
       <x>110</x>
       <y>520</y>
-      <width>91</width>
-      <height>16</height>
+      <width>102</width>
+      <height>18</height>
      </rect>
     </property>
     <property name="text">
@@ -219,14 +219,30 @@
    <property name="font">
     <font>
      <family>Sans Serif</family>
-     <pointsize>22</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="text">
     <string>TextLabel</string>
    </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
+  </widget>
+  <widget class="QPushButton" name="btn_azia">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>179</x>
+     <y>10</y>
+     <width>41</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string>Azia</string>
    </property>
   </widget>
  </widget>

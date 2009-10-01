@@ -7,7 +7,8 @@ enum Command
 {
     CHAT,
     PRONTO,
-    N_PRONTO
+    N_PRONTO,
+    AZIA_FRENETICA
 };
 
 class CommandParser : public QObject
