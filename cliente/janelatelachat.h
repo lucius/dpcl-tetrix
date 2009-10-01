@@ -28,7 +28,7 @@ public slots:
     submitStr( );
 
     void
-    incommingMensagem( QString _nome, QString _msg );
+    incommingMensagem( QString _nome, QString _msg );    
 
 private:
 

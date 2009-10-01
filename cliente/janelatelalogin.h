@@ -29,6 +29,9 @@ protected slots:
     void
     btnOkClick();
 
+    void
+    radioGameTypeClick();
+
 private:
 
     QString
