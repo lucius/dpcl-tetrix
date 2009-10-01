@@ -6,6 +6,7 @@
 #include <QWidget>
 #include <QProcess>
 #include <QFileInfo>
+#include <QHBoxLayout>
 
 #include "../tabuleiro/tabuleiro.h"
 #include "../rede_cliente/tradutor.h"
