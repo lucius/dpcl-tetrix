@@ -19,7 +19,7 @@ Tabuleiro::Tabuleiro(QString nome, QWidget *parent)
     this->timer = new QTimer(this);
     this->numeroPecasUtilizadas = 0;
     this->pontuacao = 0;
-    this->azias = 0;
+    this->azias = 1;
     this->level = 1;
 
 
@@ -122,7 +122,7 @@ Tabuleiro::apagaLinhaCheia( Tab::XyView _posicaoAApagar )
 
     this->pontuacao += 10;
 
-    if((int) this->pontuacao > 0 && this->pontuacao % 20 == 0) {
+    if(this->pontuacao % 20 == 0) {
         ++this->azias;
         emit this->aziasMudou(this->azias);
     }

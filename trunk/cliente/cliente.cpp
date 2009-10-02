@@ -184,8 +184,10 @@ Cliente::incomingMovimentaDireita( quint16 _id )
     this->getTabuleiroById(_id)->movepeca(true);
 }
 void
-Cliente::incomingAziaFrenetica(quint16 _id ){    
+Cliente::incomingAziaFrenetica(quint16 _id, quint16 _id_origem ){
+    qDebug() << "Incoming azia to "<< _id << " by" << _id_origem;
     this->getTabuleiroById(_id)->aziado();
+    //this->getTabuleiroById(_id_origem)->setAzias(this->getTabuleiroById(_id_origem)->getAzias()-1);
 }
 
 void
@@ -317,7 +319,7 @@ Cliente::connectsIncommingDataFromNet()
     QObject::connect(this->rede,SIGNAL(movePecaEsquerda(quint16)),
                      this,SLOT(incomingMovimentaEsquerda(quint16)));
 
-    QObject::connect(this->rede,SIGNAL(daAzia(quint16)),this,SLOT(incomingAziaFrenetica(quint16)));
+    QObject::connect(this->rede,SIGNAL(daAzia(quint16, quint16)),this,SLOT(incomingAziaFrenetica(quint16, quint16)));
 
 }
 
@@ -365,8 +367,7 @@ Cliente::telachatInit()
 }
 
 
-void Cliente::daAzia(int _id) {    
-    this->tabuleiro_principal->setAzias(this->tabuleiro_principal->getAzias()-1);
+void Cliente::daAzia(int _id) {
     this->aziasMudou(this->tabuleiro_principal->getAzias());
     this->rede->azia(_id);
 }
