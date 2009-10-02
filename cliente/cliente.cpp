@@ -187,7 +187,7 @@ void
 Cliente::incomingAziaFrenetica(quint16 _id, quint16 _id_origem ){
     qDebug() << "Incoming azia to "<< _id << " by" << _id_origem;
     this->getTabuleiroById(_id)->aziado();
-    //this->getTabuleiroById(_id_origem)->setAzias(this->getTabuleiroById(_id_origem)->getAzias()-1);
+    this->getTabuleiroById(_id_origem)->setAzias(this->getTabuleiroById(_id_origem)->getAzias()-1);
 }
 
 void
