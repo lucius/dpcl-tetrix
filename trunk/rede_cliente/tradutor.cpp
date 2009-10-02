@@ -255,7 +255,7 @@ Tradutor::incomingMessage(QString _mensagem)
             this->getRank(_mensagem);
             break;
         case AZIA:
-            emit this->daAzia(traduzido.segundoStr, (quint16) traduzido.primeiroStr.toInt());
+            emit this->daAzia(traduzido.segundoInt, traduzido.idJogador);
             break;
         default:
             break;
@@ -323,6 +323,7 @@ Tradutor::traduzir(QString _mensagem)
         parseado.comando = AZIA;
         parseado.idJogador = this->getPrimeiroParametro(_mensagem);        
         parseado.segundoInt = this->getSegundoParametroInt(_mensagem);
+        qDebug() << "tradutor " << parseado.idJogador << " seg " << parseado.segundoInt;
     }
 
     return parseado;
