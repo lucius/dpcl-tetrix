@@ -19,11 +19,12 @@ Tabuleiro::Tabuleiro(QString nome, QWidget *parent)
     this->timer = new QTimer(this);
     this->numeroPecasUtilizadas = 0;
     this->pontuacao = 0;
+    this->azias = 0;
     this->level = 1;
 
 
-    //this->btn_azia = this->ui->btn_azia;
-    //this->btn_azia->hide();
+    this->btn_azia = this->ui->btn_azia;
+    this->btn_azia->hide();
 
     connect( this, SIGNAL(linhaCheia(Tab::XyView)),
              this, SLOT(apagaLinhaCheia(Tab::XyView)) );
@@ -34,12 +35,12 @@ Tabuleiro::Tabuleiro(QString nome, QWidget *parent)
     connect( this, SIGNAL(pontuacaoMudou()),
              this, SLOT(setPontuacao()) );
 
-    connect(this, SIGNAL(levelMudou()),
-            this, SLOT(setLevel()));
+    connect(this, SIGNAL(aziasMudou(int)),
+            this, SLOT(setAzias(int)));
 
     connect(this->ui->btn_azia,SIGNAL(clicked()),this,SLOT(daAziaEmAlguem()));
 
-    emit this->levelMudou( );
+    emit this->aziasMudou( this->azias );
     emit this->pontuacaoMudou( );
 }
 
@@ -120,6 +121,12 @@ Tabuleiro::apagaLinhaCheia( Tab::XyView _posicaoAApagar )
     }
 
     this->pontuacao += 10;
+
+    if((int) this->pontuacao > 0 && this->pontuacao % 20 == 0) {
+        ++this->azias;
+        emit this->aziasMudou(this->azias);
+    }
+
     emit pontuacaoMudou();
 
     this->desceLinhas( _posicaoAApagar );
@@ -162,9 +169,10 @@ Tabuleiro::desceLinhas( Tab::XyView _posicao )
 }
 
 void
-Tabuleiro::setLevel( )
-{
-    this->ui->level->display((int) this->level );
+Tabuleiro::setAzias(int _n)
+{    
+    this->azias = _n;
+    this->ui->level->display((int) _n );
 }
 
 void
@@ -177,10 +185,6 @@ Tabuleiro::desce()
 void
 Tabuleiro::setPontuacao( )
 {
-    if((int) this->pontuacao > 0 && this->pontuacao % 20 == 0) {
-        ++this->level;
-        emit this->levelMudou();
-    }
     this->ui->pontuacao->display( (int) this->pontuacao );
 }
 
@@ -207,7 +211,7 @@ Tabuleiro::colidiu( )
         if ( this->numeroPecasUtilizadas % 2 == 0 )
         {
 
-            emit this->levelMudou( );
+            emit this->aziasMudou(this->azias);
         }
 
         emit this->encaixe();
@@ -330,10 +334,10 @@ Tabuleiro::checkGameOver( Tab::TipoPeca _novasPosicoes )
 
 void
 Tabuleiro::habilitaAzia(bool ok) {
-    //this->ui->btn_azia->hide();
-    //this->ui->btn_azia->setDisabled(true);
+    this->ui->btn_azia->hide();
+    this->ui->btn_azia->setDisabled(true);
 
-    if(1 || ok) {
+    if(ok) {
         this->ui->btn_azia->show();
         this->ui->btn_azia->setDisabled(false);
     }
@@ -341,13 +345,16 @@ Tabuleiro::habilitaAzia(bool ok) {
 
 
 void
-Tabuleiro::daAziaEmAlguem() {
+Tabuleiro::daAziaEmAlguem() {   
     emit this->aziaEmAlguem();
+}
+int
+Tabuleiro::getAzias() {
+    return this->azias;
 }
 void
 Tabuleiro::aziado() {
     qDebug() << "kralho mano fui aziado";
-    this->pontuacao = 100;
-    //emit pontuacaoMudou();
-    //emit this->pontuacaoMudou();
+    this->pontuacao -= 3;
+    emit pontuacaoMudou();
 }

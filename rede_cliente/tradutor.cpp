@@ -34,7 +34,7 @@ Tradutor::azia(quint16 _id)
     _mensagem = "Esta dando um azia frenética em "+this->listaJogadores[_id];
     this->chat(_mensagem);
 
-    _mensagem = QString("azia:" + this->idJogador + ";") + QString(_id);
+    _mensagem = "azia:" + this->idJogador + ";" + QString::number(_id);
 
     this->conexao->enviaDado(_mensagem);
 }
@@ -254,8 +254,7 @@ Tradutor::incomingMessage(QString _mensagem)
         case RANK:
             this->getRank(_mensagem);
             break;
-        case AZIA:
-            qDebug() << "tradutor da azia em " << traduzido.segundoInt;
+        case AZIA:            
             emit this->daAzia(traduzido.segundoInt);
             break;
         default:
@@ -319,8 +318,7 @@ Tradutor::traduzir(QString _mensagem)
         parseado.comando = RANK;
     }
     else if (comando == "azia")
-    {
-        qDebug() << "traduze azia " << _mensagem;
+    {        
         parseado.comando = AZIA;
         parseado.idJogador = this->getPrimeiroParametro(_mensagem);
         parseado.segundoInt = this->getSegundoParametroInt(_mensagem);

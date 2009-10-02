@@ -73,7 +73,7 @@ public slots:
     daAziaFrenetica(QString, QString);
 
     void
-    levelMudou();
+    aziasMudou(int);
 
 
 protected slots:

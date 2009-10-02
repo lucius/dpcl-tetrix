@@ -32,8 +32,8 @@ Cliente::Cliente(QWidget* _parent) : QWidget(_parent)
     QObject::connect(this->tabuleiro_principal,SIGNAL(gameover(int)),
                      this, SLOT(gameOver(int)));
 
-    QObject::connect(this->tabuleiro_principal,SIGNAL(levelMudou()),
-                     this, SLOT(levelMudou()));
+    QObject::connect(this->tabuleiro_principal,SIGNAL(aziasMudou(int)),
+                     this, SLOT(aziasMudou(int)));
 
     QObject::connect(this->tabuleiro_principal, SIGNAL(encaixe()),
                      this->rede,SLOT(encaixe()));
@@ -134,11 +134,11 @@ Cliente::novoJogadorConectado( quint16 _id, QString _nome )
         QObject::connect(novo_jogador_tabuleiro,SIGNAL(aziaEmAlguem()),
                      signalMapper, SLOT(map()));
 
-        qDebug() << "mapeia azia para id " << _id;
-
-        signalMapper->setMapping(novo_jogador_tabuleiro, 1);
+        signalMapper->setMapping(novo_jogador_tabuleiro, _id);
 
         QObject::connect(signalMapper,SIGNAL(mapped(int)),this,SLOT(daAzia(int)));
+
+
 
 
         novo_jogador_tabuleiro->show();
@@ -184,9 +184,8 @@ Cliente::incomingMovimentaDireita( quint16 _id )
     this->getTabuleiroById(_id)->movepeca(true);
 }
 void
-Cliente::incomingAziaFrenetica(quint16 _id ){
-    qDebug() << "da uma azia no maluco" << _id;
-    //this->getTabuleiroById(_id)->aziado();
+Cliente::incomingAziaFrenetica(quint16 _id ){    
+    this->getTabuleiroById(_id)->aziado();
 }
 
 void
@@ -366,10 +365,10 @@ Cliente::telachatInit()
 }
 
 
-void Cliente::daAzia(int _id) {
-    qDebug() << "da azia em novamente em " << _id;
-    quint16 _id2 = 2;
-    this->rede->azia(_id2);
+void Cliente::daAzia(int _id) {    
+    this->tabuleiro_principal->setAzias(this->tabuleiro_principal->getAzias()-1);
+    this->aziasMudou(this->tabuleiro_principal->getAzias());
+    this->rede->azia(_id);
 }
 void Cliente::jogadorPronto(bool pronto) {
     QString _mensagem;
@@ -432,8 +431,9 @@ Cliente::initTrilhaSonora()
 }
 
 void
-Cliente::levelMudou() {
+Cliente::aziasMudou(int _n) {
+    qDebug() << "as azias mudaram mano" << _n;
     foreach(int i, this->outros_tabuleiros.keys()) {
-        this->outros_tabuleiros.value(i)->habilitaAzia(true);
+        this->outros_tabuleiros.value(i)->habilitaAzia((_n>0));
     }
 }
