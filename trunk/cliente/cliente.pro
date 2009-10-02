@@ -1,4 +1,4 @@
-QT += network
+QT += network phonon
 
 # phonon
 INCLUDEPATH += /usr/include/KDE/Phonon/
@@ -12,10 +12,7 @@ SOURCES += main.cpp \
     ../rede_cliente/conexao.cpp \
     janelatelachat.cpp \
     janelatelalogin.cpp \
-    commandparser.cpp \
-    ../server/jogador.cpp \
-    ../server/roteador.cpp \
-    ../server/ouvinte.cpp
+    commandparser.cpp 
 HEADERS += cliente.h \
     ../tabuleiro/basicos.h \
     ../tabuleiro/mapapecas.h \
@@ -26,10 +23,7 @@ HEADERS += cliente.h \
     ../rede_cliente/conexao.h \
     janelatelachat.h \
     janelatelalogin.h \
-    commandparser.h \
-    ../server/roteador.h \
-    ../server/jogador.h \
-    ../server/ouvinte.h
+    commandparser.h 
 FORMS += tela_chat.ui \
     tela_login.ui \
     ../tabuleiro/tabuleiro.ui
