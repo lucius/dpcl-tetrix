@@ -59,7 +59,10 @@ class Tabuleiro : public QWidget
         apagaLinhaCheia( Tab::XyView );
 
         void
-        setLevel( );
+        setAzias(int);
+
+        int
+        getAzias();
 
         void
         setPontuacao( );
@@ -84,7 +87,7 @@ class Tabuleiro : public QWidget
         gameover( int pontuacao );
 
         void
-        levelMudou( );
+        aziasMudou(int );
 
         void
         aziaEmAlguem();
@@ -108,8 +111,11 @@ class Tabuleiro : public QWidget
         QTimer*
         timer;
 
-        unsigned int
+        int
         pontuacao;
+
+        int
+        azias;
 
         unsigned int
         level;
