@@ -134,7 +134,7 @@ namespace Rede_Cliente
         chat(QString, QString);
 
         void
-        daAzia(quint16);
+        daAzia(quint16, quint16);
 
         void
         conexaoEstabelecida();

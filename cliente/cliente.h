@@ -67,7 +67,7 @@ public slots:
     incomingMovimentaDireita(quint16);
 
     void
-    incomingAziaFrenetica(quint16);
+    incomingAziaFrenetica(quint16, quint16);
 
     void
     daAziaFrenetica(QString, QString);
