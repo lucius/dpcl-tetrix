@@ -45,6 +45,10 @@ Cliente::Cliente(QWidget* _parent) : QWidget(_parent)
                      this, SLOT(jogadorOver(quint16,quint16)));
 
     this->connectsIncommingDataFromNet();
+
+    this->aziaMaster = new AziaMaster();
+
+
 }
 
 Cliente::~Cliente()
@@ -186,7 +190,8 @@ Cliente::incomingMovimentaDireita( quint16 _id )
 void
 Cliente::incomingAziaFrenetica(quint16 _id, quint16 _id_origem ){
     qDebug() << "Incoming azia to "<< _id << " by" << _id_origem;
-    this->getTabuleiroById(_id)->aziado();
+
+    this->aziaMaster->novaAzia(this->getTabuleiroById(_id));
     this->getTabuleiroById(_id_origem)->setAzias(this->getTabuleiroById(_id_origem)->getAzias()-1);
 }
 
@@ -253,9 +258,7 @@ void
 Cliente::keyPressEvent(QKeyEvent* _key)
 {
     const int
-    key_enter = 16777220;
-    const int
-    key_enter2 = 16777221;
+    key_enter = 16777220;    
 
     switch(_key->key())
     {

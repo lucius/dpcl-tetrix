@@ -8,6 +8,8 @@
 #include "basicos.h"
 #include "pivo.h"
 
+
+
 namespace Ui
 {
     class Tabuleiro;
@@ -136,7 +138,7 @@ class Tabuleiro : public QWidget
         getTimeOut( );
 
         bool
-        checkGameOver( Tab::TipoPeca );
+        checkGameOver( Tab::TipoPeca );        
 
     private:
         Ui::Tabuleiro *ui;
@@ -144,5 +146,6 @@ class Tabuleiro : public QWidget
         bool
         posso_mexer;
 };
+
 
 #endif // TABULEIRO_H

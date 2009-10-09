@@ -1,7 +1,8 @@
-QT += network phonon
+QT += network
 
 # phonon
-INCLUDEPATH += /usr/include/KDE/Phonon/
+#INCLUDEPATH += /usr/include/KDE/Phonon/
+
 SOURCES += main.cpp \
     cliente.cpp \
     ../tabuleiro/mapapecas.cpp \
