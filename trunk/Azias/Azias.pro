@@ -6,5 +6,6 @@ HEADERS += AziaMaster.h \
 SOURCES += AziaMaster.cpp \
     Azia.cpp \
     AziaRodaPeca.cpp \
+    main.cpp
 
 

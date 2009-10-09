@@ -82,6 +82,10 @@ Rede_Server::Roteador::recebeDado( QString _dado )
     {
         this->recebeOver( _dado );
     }
+    else if ( comando_str == "azia" )
+    {
+        this->recebeAzia( _dado );
+    }
     else
     {
         emit this->broadcast(_dado);
@@ -278,6 +282,18 @@ Rede_Server::Roteador::recebeEnca( QString _dado )
         _dado.append(";" + this->geraNovaPeca() );
         this->broadcast(_dado);
     }
+}
+
+void
+Rede_Server::Roteador::recebeAzia( QString _dado )
+{
+    QString
+    id_azia = QString::number((qrand() % 7 )+ 1);
+
+    QString
+    resposta = _dado +";"+id_azia;
+
+    this->broadcast( resposta );
 }
 
 void
