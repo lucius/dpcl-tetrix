@@ -1,7 +1,6 @@
 TEMPLATE = subdirs
 SUBDIRS = ./cliente \
-        ./server \
-        ./Azias
+        ./server
 
 
 CONFIG += ordered

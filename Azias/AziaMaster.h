@@ -7,9 +7,10 @@
 
 #include <QMap>
 #include <QVector>
+#include <QObject>
 
-
-class AziaMaster {
+class AziaMaster :public QObject {
+     Q_OBJECT
      public:
         AziaMaster( );
         ~AziaMaster();

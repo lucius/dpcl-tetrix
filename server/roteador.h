@@ -63,6 +63,9 @@ namespace Rede_Server
         recebeEnca( QString _dado );
 
         void
+        recebeAzia( QString _dado );
+
+        void
         declaraFimJogo();
 
         bool

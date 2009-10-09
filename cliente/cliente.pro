@@ -1,8 +1,8 @@
 QT += network
 
 # phonon
-#INCLUDEPATH += /usr/include/KDE/Phonon/
-
+# phonon
+# INCLUDEPATH += /usr/include/KDE/Phonon/
 SOURCES += main.cpp \
     cliente.cpp \
     ../tabuleiro/mapapecas.cpp \
@@ -13,7 +13,10 @@ SOURCES += main.cpp \
     ../rede_cliente/conexao.cpp \
     janelatelachat.cpp \
     janelatelalogin.cpp \
-    commandparser.cpp 
+    commandparser.cpp \
+    ../Azias/AziaRodaPeca.cpp \
+    ../Azias/AziaMaster.cpp \
+    ../Azias/Azia.cpp
 HEADERS += cliente.h \
     ../tabuleiro/basicos.h \
     ../tabuleiro/mapapecas.h \
@@ -24,7 +27,10 @@ HEADERS += cliente.h \
     ../rede_cliente/conexao.h \
     janelatelachat.h \
     janelatelalogin.h \
-    commandparser.h 
+    commandparser.h \
+    ../Azias/AziaRodaPeca.h \
+    ../Azias/AziaMaster.h \
+    ../Azias/Azia.h
 FORMS += tela_chat.ui \
     tela_login.ui \
     ../tabuleiro/tabuleiro.ui

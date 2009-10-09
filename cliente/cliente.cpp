@@ -431,7 +431,7 @@ Cliente::initTrilhaSonora()
 
     media->play();
 
-    QObject::connect(media,SIGNAL(finished()), media, SLOT(play()));*/
+    QObject::connect(media,SIGNAL(finished()), media, SLOT(play())); */
 }
 
 void
