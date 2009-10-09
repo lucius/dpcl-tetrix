@@ -9,6 +9,7 @@
 #include "pivo.h"
 
 
+class Azia;
 
 namespace Ui
 {
@@ -37,6 +38,9 @@ class Tabuleiro : public QWidget
         aziado();
 
         QPushButton * btn_azia;
+
+        int
+        getPontuacao();
 
     public slots:
         void
@@ -67,7 +71,7 @@ class Tabuleiro : public QWidget
         getAzias();
 
         void
-        setPontuacao( );
+        setPontuacao( int );
 
         void
         desce();
@@ -94,6 +98,9 @@ class Tabuleiro : public QWidget
         void
         aziaEmAlguem();
 
+        void
+        pontuacaoMudou( int);
+
     #if !defined(Q_MOC_RUN)
     private: // can only be emitted by TetrixBoard
     #endif
@@ -106,8 +113,7 @@ class Tabuleiro : public QWidget
 
 
 
-        void
-        pontuacaoMudou( );
+
 
     protected:
         QTimer*
@@ -144,6 +150,8 @@ class Tabuleiro : public QWidget
         getNewColor( qint8 );
 
     private:
+        friend class Azia;
+
         Ui::Tabuleiro *ui;
 
         bool

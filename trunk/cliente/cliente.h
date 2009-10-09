@@ -71,10 +71,33 @@ public slots:
     incomingAziaFrenetica(quint16, quint16);
 
     void
+    incomingPontuacao(quint16, int);
+
+    void
     daAziaFrenetica(QString, QString);
 
     void
     aziasMudou(int);
+
+
+
+    void
+    pecaRotaciona();
+
+    void
+    pecaDesce();
+
+    void
+    pecaMovimentaEsquerda();
+
+    void
+    pecaMovimentaDireita();
+
+    void
+    pecaEncaixa();
+
+    Tabuleiro*
+    getTabuleiroById( quint16 );
 
 
 protected slots:
@@ -128,8 +151,13 @@ private:
     bool
     game_started;
 
+    friend class AziaMaster;
+    friend class Azia;
+    friend class AziaRodaPeca;
+
     quint16
     meu_id;
+
 
     void
     connectsIncommingDataFromNet();
@@ -142,9 +170,6 @@ private:
 
     void
     startServerProcess( quint8 _n_jogadores );
-
-    Tabuleiro*
-    getTabuleiroById( quint16 );
 
     void
     initTrilhaSonora();

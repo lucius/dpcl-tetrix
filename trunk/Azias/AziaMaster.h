@@ -3,30 +3,33 @@
 
 #include "./Azia.h"
 #include "./AziaRodaPeca.h"
-#include "../tabuleiro/tabuleiro.h"
+#include "./AziaPontuacao.h"
+
 
 #include <QMap>
 #include <QVector>
 #include <QObject>
 
-class AziaMaster :public QObject {
-     Q_OBJECT
+
+class Cliente;
+
+class AziaMaster : public QObject {
+    Q_OBJECT
+
      public:
-        AziaMaster( );
-        ~AziaMaster();
-        void setTabuleiro( Tabuleiro *);
-        Tabuleiro * getTabuleiro();
+        AziaMaster( Cliente *);
+        virtual ~AziaMaster();
 
     public slots:
-        void novaAzia(Tabuleiro *);
+        void novaAzia(quint16);
         void azia_terminou();
 
     private:
-        Tabuleiro * tabuleiro;
+        Cliente * cliente;
         void enqueueAzia(Azia *);
         void dequeuAzia();
-
         QVector<Azia *> queue_azias;
+
 };
 
 #endif // AZIAMASTER_H
