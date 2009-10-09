@@ -246,8 +246,8 @@ Tabuleiro::startjogo( quint16 descendo, quint16 proxima )
     Tab::XyView
     pos1(30,30);
 
-    this->currentPiece = new Tab::Pivo( descendo, QColor(0,0,0), pos, this->ui->piecesContainer );
-    this->previewPiece = new Tab::Pivo( proxima, QColor(0,0,0), pos1, this->ui->piecePreview );
+    this->currentPiece = new Tab::Pivo( descendo, this->getNewColor(descendo), pos, this->ui->piecesContainer );
+    this->previewPiece = new Tab::Pivo( proxima, this->getNewColor(proxima), pos1, this->ui->piecePreview );
 
     connect( this->timer, SIGNAL(timeout()), this->currentPiece, SLOT(desce()) );
     connect( this->currentPiece, SIGNAL(colidiu()), this, SLOT(colidiu()) );
@@ -274,12 +274,12 @@ Tabuleiro::novapeca( qint8 nova )
     else
     {
         this->currentPiece = new Tab::Pivo( this->previewPiece->getPecaInt(),
-                                        QColor(0,0,0),
+                                        QColor(this->previewPiece->cor),
                                         pos1,
                                         this->ui->piecesContainer );
 
         delete this->previewPiece;
-        this->previewPiece = new Tab::Pivo( nova, QColor(0,0,0), pos, this->ui->piecePreview );
+        this->previewPiece = new Tab::Pivo( nova, this->getNewColor(nova), pos, this->ui->piecePreview );
     
         connect(this->timer, SIGNAL(timeout()), this->currentPiece, SLOT(desce()));
         connect(this->currentPiece, SIGNAL(colidiu()), this, SLOT(colidiu()));
@@ -350,10 +350,12 @@ void
 Tabuleiro::daAziaEmAlguem() {   
     emit this->aziaEmAlguem();
 }
+
 int
 Tabuleiro::getAzias() {
     return this->azias;
 }
+
 void
 Tabuleiro::aziado() {
     qDebug() << "kralho mano fui aziado";
@@ -371,4 +373,34 @@ Tabuleiro::aziado() {
 
 
 
+}
+
+QColor
+Tabuleiro::getNewColor( qint8 _idPeca )
+{
+    quint16
+    randNum;
+
+    if( this->pontuacao == 0 || this->level == 0 )
+    {
+        randNum = 42 * 211 / _idPeca * Qt::Key_BracketLeft;
+    }
+    else
+    {
+        randNum = this->level * this->pontuacao / _idPeca * Qt::Key_BracketLeft;
+    }
+
+    switch( randNum % 5 )
+    {
+        case 0:
+            return QColor("red");
+        case 1:
+            return QColor("green");
+        case 2:
+            return QColor("blue");
+        case 3:
+            return QColor("black");
+        case 4:
+            return QColor("fuchsia");
+    }
 }

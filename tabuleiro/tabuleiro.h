@@ -140,6 +140,9 @@ class Tabuleiro : public QWidget
         bool
         checkGameOver( Tab::TipoPeca );        
 
+        QColor
+        getNewColor( qint8 );
+
     private:
         Ui::Tabuleiro *ui;
 
