@@ -31,6 +31,9 @@ namespace Tab
             Tab::XyView
             getOndeEstou();
 
+            QColor
+            cor;
+
         public slots:
             void
             rotaciona( );
@@ -65,9 +68,6 @@ namespace Tab
             
             QVector<Tab::Pecinha*>
             agregadas;
-
-            QColor
-            cor;
 
             Tab::XyView
             ondeEuToExibido;
