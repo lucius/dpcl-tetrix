@@ -11,8 +11,7 @@ JanelaTelaLogin::JanelaTelaLogin( QWidget* _parent ) : QWidget(_parent)
 
     this->conteudo->server_additional_options->hide();
     this->conteudo->client_additional_options->hide();
-    this->conteudo->client_additional_options->show();
-    this->conteudo->client_additional_options->hide();
+
 
     QObject::connect(this->conteudo->btn_ok, SIGNAL(clicked()),
                      this,SLOT(btnOkClick()));

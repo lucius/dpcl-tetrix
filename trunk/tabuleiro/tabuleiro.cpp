@@ -4,6 +4,7 @@
 #include "tabuleiro.h"
 #include "ui_tabuleiro.h"
 
+
 Tabuleiro::Tabuleiro(QString nome, QWidget *parent)
     : QWidget(parent), ui(new Ui::Tabuleiro)
 {
@@ -42,6 +43,7 @@ Tabuleiro::Tabuleiro(QString nome, QWidget *parent)
 
     emit this->aziasMudou( this->azias );
     emit this->pontuacaoMudou( );
+
 }
 
 Tabuleiro::~Tabuleiro()
@@ -355,6 +357,18 @@ Tabuleiro::getAzias() {
 void
 Tabuleiro::aziado() {
     qDebug() << "kralho mano fui aziado";
+
+
+    /*
+    azia -3 pontos
     this->pontuacao -= 3;
     emit pontuacaoMudou();
+    */
+
+    /* azia 2*/
+
+    //connect( this->timer, SIGNAL(timeout()), this->currentPiece, SLOT(rotaciona()));
+
+
+
 }

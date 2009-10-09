@@ -3,10 +3,10 @@
 # #####################################################################
 TEMPLATE = app
 QT += network
-TARGET = 
+#TARGET =
 DEPENDPATH += .
-INCLUDEPATH += /home/dizus/docs/faculdade/redes/jogo/tetris/server/. \
-    .
+#INCLUDEPATH += /home/mysyfy/work/uel/redes/dpcl-tetrix/server/. \
+
 
 # Input
 HEADERS += jogador.h \

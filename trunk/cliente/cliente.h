@@ -1,4 +1,4 @@
-    #ifndef CLIENTE_H
+#ifndef CLIENTE_H
 #define CLIENTE_H
 
 #include <QMap>
@@ -9,9 +9,10 @@
 #include <QHBoxLayout>
 #include <QSignalMapper>
 
+
 #include "../tabuleiro/tabuleiro.h"
 #include "../rede_cliente/tradutor.h"
-
+#include "../Azias/AziaMaster.h"
 
 #include "janelatelachat.h"
 #include "janelatelalogin.h"
@@ -100,6 +101,9 @@ private:
     Tabuleiro*
     tabuleiro_principal;
 
+    AziaMaster*
+    aziaMaster;
+
     QMap< int, Tabuleiro* >
     outros_tabuleiros;
 
@@ -144,6 +148,8 @@ private:
 
     void
     initTrilhaSonora();
+
+
 };
 
 #endif // CLIENTE_H
