@@ -20,12 +20,12 @@ Tabuleiro::Tabuleiro(QString nome, QWidget *parent)
     this->timer = new QTimer(this);
     this->numeroPecasUtilizadas = 0;
     this->pontuacao = 0;
-    this->azias = 1;
+    this->azias = 200;
     this->level = 1;
 
 
     this->btn_azia = this->ui->btn_azia;
-    this->btn_azia->hide();
+    //this->btn_azia->hide();
 
     connect( this, SIGNAL(linhaCheia(Tab::XyView)),
              this, SLOT(apagaLinhaCheia(Tab::XyView)) );
@@ -33,8 +33,8 @@ Tabuleiro::Tabuleiro(QString nome, QWidget *parent)
     connect( this, SIGNAL(procuraLinhas()),
              this, SLOT(procuraLinhasCheias()) );
 
-    connect( this, SIGNAL(pontuacaoMudou()),
-             this, SLOT(setPontuacao()) );
+    connect( this, SIGNAL(pontuacaoMudou(int)),
+             this, SLOT(setPontuacao(int)) );
 
     connect(this, SIGNAL(aziasMudou(int)),
             this, SLOT(setAzias(int)));
@@ -42,7 +42,7 @@ Tabuleiro::Tabuleiro(QString nome, QWidget *parent)
     connect(this->ui->btn_azia,SIGNAL(clicked()),this,SLOT(daAziaEmAlguem()));
 
     emit this->aziasMudou( this->azias );
-    emit this->pontuacaoMudou( );
+    emit this->pontuacaoMudou( this->pontuacao);
 
 }
 
@@ -129,7 +129,7 @@ Tabuleiro::apagaLinhaCheia( Tab::XyView _posicaoAApagar )
         emit this->aziasMudou(this->azias);
     }
 
-    emit pontuacaoMudou();
+    emit pontuacaoMudou(this->pontuacao);
 
     this->desceLinhas( _posicaoAApagar );
 }
@@ -185,8 +185,9 @@ Tabuleiro::desce()
 }
 
 void
-Tabuleiro::setPontuacao( )
+Tabuleiro::setPontuacao(int _pontuacao )
 {
+    this->pontuacao = _pontuacao;
     this->ui->pontuacao->display( (int) this->pontuacao );
 }
 
@@ -360,20 +361,13 @@ void
 Tabuleiro::aziado() {
     qDebug() << "kralho mano fui aziado";
 
-
-    /*
-    azia -3 pontos
-    this->pontuacao -= 3;
-    emit pontuacaoMudou();
-    */
-
-    /* azia 2*/
-
-    //connect( this->timer, SIGNAL(timeout()), this->currentPiece, SLOT(rotaciona()));
-
-
-
 }
+
+int
+Tabuleiro::getPontuacao() {
+    return this->pontuacao;
+}
+
 
 QColor
 Tabuleiro::getNewColor( qint8 _idPeca )
@@ -404,3 +398,4 @@ Tabuleiro::getNewColor( qint8 _idPeca )
             return QColor("fuchsia");
     }
 }
+

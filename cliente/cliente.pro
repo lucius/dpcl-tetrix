@@ -13,10 +13,13 @@ SOURCES += main.cpp \
     ../rede_cliente/conexao.cpp \
     janelatelachat.cpp \
     janelatelalogin.cpp \
-    commandparser.cpp \
-    ../Azias/AziaRodaPeca.cpp \
     ../Azias/AziaMaster.cpp \
-    ../Azias/Azia.cpp
+    ../Azias/Azia.cpp \
+    ../Azias/AziaRodaPeca.cpp \
+    ../Azias/AziaPontuacao.cpp \
+    commandparser.cpp 
+
+
 HEADERS += cliente.h \
     ../tabuleiro/basicos.h \
     ../tabuleiro/mapapecas.h \
@@ -28,9 +31,11 @@ HEADERS += cliente.h \
     janelatelachat.h \
     janelatelalogin.h \
     commandparser.h \
-    ../Azias/AziaRodaPeca.h \
     ../Azias/AziaMaster.h \
-    ../Azias/Azia.h
+    ../Azias/Azia.h \
+    ../Azias/AziaRodaPeca.h \
+    ../Azias/AziaPontuacao.h
+
 FORMS += tela_chat.ui \
     tela_login.ui \
     ../tabuleiro/tabuleiro.ui

@@ -10,7 +10,7 @@ JanelaTelaLogin::JanelaTelaLogin( QWidget* _parent ) : QWidget(_parent)
     this->conteudo->setupUi(this);
 
     this->conteudo->server_additional_options->hide();
-    this->conteudo->client_additional_options->hide();
+    //this->conteudo->client_additional_options->hide();
 
 
     QObject::connect(this->conteudo->btn_ok, SIGNAL(clicked()),

@@ -46,7 +46,7 @@ Cliente::Cliente(QWidget* _parent) : QWidget(_parent)
 
     this->connectsIncommingDataFromNet();
 
-    this->aziaMaster = new AziaMaster();
+    this->aziaMaster = new AziaMaster(this);
 
 
 }
@@ -191,8 +191,13 @@ void
 Cliente::incomingAziaFrenetica(quint16 _id, quint16 _id_origem ){
     qDebug() << "Incoming azia to "<< _id << " by" << _id_origem;
 
-    this->aziaMaster->novaAzia(this->getTabuleiroById(_id));
+    this->aziaMaster->novaAzia(_id);
+
     this->getTabuleiroById(_id_origem)->setAzias(this->getTabuleiroById(_id_origem)->getAzias()-1);
+}
+void
+Cliente::incomingPontuacao(quint16 _id, int _pontuacao) {
+    this->getTabuleiroById(_id)->setPontuacao(_pontuacao);
 }
 
 void
@@ -284,6 +289,36 @@ Cliente::keyPressEvent(QKeyEvent* _key)
         case Qt::Key_P:
             this->rede->start(true);
     }
+}
+
+void
+Cliente::pecaRotaciona()
+{
+    this->rede->rotacao();
+}
+
+void
+Cliente::pecaDesce()
+{
+    this->rede->desce();
+}
+
+void
+Cliente::pecaMovimentaEsquerda()
+{
+    this->rede->movimentaEsquerda();
+}
+
+void
+Cliente::pecaMovimentaDireita()
+{
+    this->rede->movimentaDireita();
+}
+
+void
+Cliente::pecaEncaixa()
+{
+    this->rede->encaixe();
 }
 
 void
@@ -438,6 +473,6 @@ void
 Cliente::aziasMudou(int _n) {
     qDebug() << "as azias mudaram mano" << _n;
     foreach(int i, this->outros_tabuleiros.keys()) {
-        this->outros_tabuleiros.value(i)->habilitaAzia((_n>0));
+        this->outros_tabuleiros.value(i)->habilitaAzia((_n>1));
     }
 }

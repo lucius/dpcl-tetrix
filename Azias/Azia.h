@@ -4,23 +4,33 @@
 #include <QObject>
 #include <QTimer>
 #include <QDebug>
-#include "../tabuleiro/tabuleiro.h"
+
+
+
+class Cliente;
 
 class Azia : public QObject  {
     Q_OBJECT
     public:
-        Azia(QObject* _parent = 0);
+        Azia(Cliente *, quint16);
         virtual ~Azia();
-        virtual void executa(Tabuleiro *);
+        virtual void start() = 0 ;
         int ticks;
+        int total_ticks;
+        virtual void configureAzia();
+
     public slots:
         virtual void timerTick();
+        void timerTickEnd();
+        void piscaTabuleiro();
     signals:
         void start_azia();
         void end_azia();
 
     protected:
-       QTimer * timer;       
+        QTimer * timer;       
+        Cliente * cliente;
+        quint16 id_tabuleiro;
 
 };
 

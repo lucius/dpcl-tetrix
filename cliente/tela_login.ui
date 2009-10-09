@@ -57,11 +57,11 @@
      <x>80</x>
      <y>0</y>
      <width>361</width>
-     <height>71</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string>background: url(633889786990781250.png) no-repeat;</string>
+    <string>background: url(./633889786990781250.png) no-repeat;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -111,6 +111,9 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
+   <property name="text">
+    <string>Boga</string>
+   </property>
   </widget>
   <widget class="QRadioButton" name="radio_cliente">
    <property name="geometry">
@@ -123,6 +126,9 @@
    </property>
    <property name="text">
     <string>Conectar em um servidor</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QRadioButton" name="radio_single">
@@ -227,6 +233,9 @@
       <width>151</width>
       <height>24</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>localhost</string>
     </property>
    </widget>
   </widget>

@@ -1,25 +1,23 @@
 #include "AziaRodaPeca.h"
+#include "../cliente/cliente.h"
 
-AziaRodaPeca::AziaRodaPeca() {
-    qDebug() << "AziaRodaPeca";
+AziaRodaPeca::AziaRodaPeca(Cliente * _cliente, quint16 _id_tabuleiro) : Azia(_cliente, _id_tabuleiro) {
+    this->configureAzia();
 }
 AziaRodaPeca::~AziaRodaPeca() {
-    qDebug() << "~AziaRodaPeca";
 }
 
-
-void AziaRodaPeca::executa(Tabuleiro * tabuleiro) {
-    qDebug() << "Executa roda Peca";
+void AziaRodaPeca::configureAzia() {
+    Azia::configureAzia();
+    this->total_ticks = 100;
 }
-
-
+void AziaRodaPeca::start() {
+    this->timer->start(200);
+}
 void AziaRodaPeca::timerTick() {
-    this->ticks++;       
-    qDebug() << "Roda Peca TIMER TICK";
+    Azia::timerTick();
 
-    if(this->ticks == 5) {
-        qDebug() << "FIM Roda Peca";
-        this->timer->disconnect(this,SLOT(timerTick()));
-        emit this->end_azia();
+    if(this->id_tabuleiro == this->cliente->meu_id) {
+        this->cliente->pecaRotaciona();
     }
 }
