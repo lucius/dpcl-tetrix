@@ -154,6 +154,7 @@ private:
     friend class AziaMaster;
     friend class Azia;
     friend class AziaRodaPeca;
+    friend class AziaEscondeTabuleiro;
 
     quint16
     meu_id;

@@ -12,16 +12,19 @@ AziaMaster::~AziaMaster() {
 
 void AziaMaster::novaAzia(quint16 _id_tabuleiro) {
 
-    int random = 2;
+    int random = qrand() % 3;
 
     Azia * azia;
 
     switch(random) {
-        case 1:
+        case 0:
             azia = new AziaRodaPeca(this->cliente, _id_tabuleiro);
         break;
-        case 2:
+        case 1:
             azia = new AziaPontuacao(this->cliente, _id_tabuleiro);
+        break;
+        case 2:
+            azia = new AziaEscondeTabuleiro(this->cliente, _id_tabuleiro);
         break;
     }
     QObject::connect(azia,SIGNAL(end_azia()),this,SLOT(azia_terminou()));
