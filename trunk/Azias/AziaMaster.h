@@ -4,6 +4,7 @@
 #include "./Azia.h"
 #include "./AziaRodaPeca.h"
 #include "./AziaPontuacao.h"
+#include "./AziaEscondeTabuleiro.h"
 
 
 #include <QMap>

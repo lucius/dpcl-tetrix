@@ -14,28 +14,33 @@ void Azia::configureAzia() {
     this->ticks = 0;
     this->total_ticks = 5;
     QObject::connect(this->timer, SIGNAL(timeout()), this, SLOT(timerTick()));
-    QObject::connect(this->timer, SIGNAL(timeout()), this, SLOT(piscaTabuleiro()));
+
+    if(this->id_tabuleiro != this->cliente->meu_id){
+        QObject::connect(this->timer, SIGNAL(timeout()), this, SLOT(piscaTabuleiro()));
+    }
 }
 
 void Azia::piscaTabuleiro() {
-    QString border_style = this->ticks % 2 == 0 ? "" : "border:3px solid red";
-    this->cliente->getTabuleiroById(this->id_tabuleiro)->setStyleSheet(border_style);
+    QString border_style = this->ticks % 2 == 0 ? "" : "#frame { border:1px solid red;}";
+    this->cliente->getTabuleiroById(this->id_tabuleiro)->ui->frame->setStyleSheet(border_style);
 }
-void Azia::timerTickEnd() {    
+void Azia::timerTickEnd() {
+    qDebug() << " tick end father ";
     this->timer->disconnect(this->timer,SIGNAL(timeout()),this,SLOT(timerTick()));
+    this->timer->disconnect(this->timer,SIGNAL(timeout()),this,SLOT(piscaTabuleiro()));
+    this->cliente->getTabuleiroById(this->id_tabuleiro)->ui->frame->setStyleSheet("");
 }
 
 
 void Azia::timerTick() {
 
-    QString border_style = this->ticks % 2 == 0 ? "" : "border:3px solid red";
+    this->ticks++;
 
-    this->cliente->getTabuleiroById(this->id_tabuleiro)->setStyleSheet(border_style);
     if(this->ticks >= this->total_ticks) {
         emit this->end_azia();
     }
 
-    this->ticks++;
+
 
 }
 

@@ -17,6 +17,7 @@ SOURCES += main.cpp \
     ../Azias/Azia.cpp \
     ../Azias/AziaRodaPeca.cpp \
     ../Azias/AziaPontuacao.cpp \
+    ../Azias/AziaEscondeTabuleiro.cpp \
     commandparser.cpp 
 
 
@@ -34,7 +35,8 @@ HEADERS += cliente.h \
     ../Azias/AziaMaster.h \
     ../Azias/Azia.h \
     ../Azias/AziaRodaPeca.h \
-    ../Azias/AziaPontuacao.h
+    ../Azias/AziaPontuacao.h \
+    ../Azias/AziaEscondeTabuleiro.h
 
 FORMS += tela_chat.ui \
     tela_login.ui \

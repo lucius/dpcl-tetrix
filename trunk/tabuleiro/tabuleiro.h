@@ -9,7 +9,9 @@
 #include "pivo.h"
 
 
+
 class Azia;
+class AziaEscondeTabuleiro;
 
 namespace Ui
 {
@@ -151,6 +153,7 @@ class Tabuleiro : public QWidget
 
     private:
         friend class Azia;
+        friend class AziaEscondeTabuleiro;
 
         Ui::Tabuleiro *ui;
 

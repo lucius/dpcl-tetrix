@@ -180,6 +180,8 @@
     <property name="styleSheet">
      <string notr="true">color: rgb(85, 255, 0);</string>
     </property>
+    <zorder>parede</zorder>
+    <zorder>parede</zorder>
    </widget>
    <widget class="QWidget" name="piecePreview" native="true">
     <property name="enabled">
@@ -243,6 +245,16 @@
    </property>
    <property name="text">
     <string>Azia</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="parede" native="true">
+   <property name="geometry">
+    <rect>
+     <x>-1</x>
+     <y>40</y>
+     <width>221</width>
+     <height>511</height>
+    </rect>
    </property>
   </widget>
  </widget>
