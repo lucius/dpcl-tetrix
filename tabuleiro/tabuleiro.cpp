@@ -20,7 +20,7 @@ Tabuleiro::Tabuleiro(QString nome, QWidget *parent)
     this->timer = new QTimer(this);
     this->numeroPecasUtilizadas = 0;
     this->pontuacao = 0;
-    this->azias = 200;
+    this->azias = 0;
     this->level = 1;
 
 
