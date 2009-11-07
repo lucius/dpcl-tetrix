@@ -61,7 +61,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string>background: url(./633889786990781250.png) no-repeat;</string>
+    <string notr="true">background: url(:images/logo.png) no-repeat;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
