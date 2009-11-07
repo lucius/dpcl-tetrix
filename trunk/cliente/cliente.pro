@@ -17,6 +17,7 @@ SOURCES += main.cpp \
     ../Azias/Azia.cpp \
     ../Azias/AziaRodaPeca.cpp \
     ../Azias/AziaPontuacao.cpp \
+    commandparser.cpp
     ../Azias/AziaEscondeTabuleiro.cpp \
     commandparser.cpp 
 
@@ -37,7 +38,7 @@ HEADERS += cliente.h \
     ../Azias/AziaRodaPeca.h \
     ../Azias/AziaPontuacao.h \
     ../Azias/AziaEscondeTabuleiro.h
-
 FORMS += tela_chat.ui \
     tela_login.ui \
     ../tabuleiro/tabuleiro.ui
+RESOURCES += images.qrc
