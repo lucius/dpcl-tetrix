@@ -1,4 +1,4 @@
-QT += network
+QT += network gui
 
 # phonon
 # phonon
@@ -17,7 +17,6 @@ SOURCES += main.cpp \
     ../Azias/Azia.cpp \
     ../Azias/AziaRodaPeca.cpp \
     ../Azias/AziaPontuacao.cpp \
-    commandparser.cpp
     ../Azias/AziaEscondeTabuleiro.cpp \
     commandparser.cpp 
 
