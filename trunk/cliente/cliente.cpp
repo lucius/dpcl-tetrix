@@ -482,6 +482,6 @@ void
 Cliente::aziasMudou(int _n) {
     qDebug() << "as azias mudaram mano" << _n;
     foreach(int i, this->outros_tabuleiros.keys()) {
-        this->outros_tabuleiros.value(i)->habilitaAzia((_n>1));
+        this->outros_tabuleiros.value(i)->habilitaAzia((_n>=1));
     }
 }
