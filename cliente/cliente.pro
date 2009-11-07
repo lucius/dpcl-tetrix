@@ -1,4 +1,6 @@
 QT += network gui
+QMAKE_CXXFLAGS -= -O2
+QMAKE_CXXFLAGS += -O3 -fomit-frame-pointer
 
 # phonon
 # phonon

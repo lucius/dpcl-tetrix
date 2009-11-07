@@ -25,7 +25,7 @@ Tabuleiro::Tabuleiro(QString nome, QWidget *parent)
 
 
     this->btn_azia = this->ui->btn_azia;
-    //this->btn_azia->hide();
+    this->btn_azia->hide();
 
     connect( this, SIGNAL(linhaCheia(Tab::XyView)),
              this, SLOT(apagaLinhaCheia(Tab::XyView)) );
