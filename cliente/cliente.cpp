@@ -8,6 +8,8 @@
 #include <QDebug>
 #include <QResource>
 
+#include <cstdlib>
+
 Cliente::Cliente(QWidget* _parent) : QWidget(_parent)
 {
     this->setFixedHeight(720);
@@ -423,6 +425,14 @@ void Cliente::jogadorPronto(bool pronto) {
 
 void Cliente::startServerProcess( quint8 _n_jogadores )
 {
+    QFileInfo server("../server/server");
+
+
+    if (! server.exists() )
+    {
+        QMessageBox::critical(this,"Deu merda","Executavel servidor não encontrado");
+    }
+
     QString
     n_jogadores = QString::number( _n_jogadores );
 
@@ -434,7 +444,6 @@ void Cliente::startServerProcess( quint8 _n_jogadores )
     QObject::connect(this->server_process, SIGNAL(readyReadStandardOutput()),
                      this, SLOT(stdOutServer()));
 
-    this->server_process->waitForReadyRead(250);
 }
 
 Tabuleiro*

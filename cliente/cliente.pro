@@ -20,7 +20,6 @@ SOURCES += main.cpp \
     ../Azias/AziaEscondeTabuleiro.cpp \
     commandparser.cpp 
 
-
 HEADERS += cliente.h \
     ../tabuleiro/basicos.h \
     ../tabuleiro/mapapecas.h \
