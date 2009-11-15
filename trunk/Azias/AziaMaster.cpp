@@ -33,7 +33,7 @@ void AziaMaster::novaAzia(quint16 _id_tabuleiro) {
 
 
 }
-//(ip.dst == 187.0.73.182 || ip.dst == 192.168.0.12) && tcp.checksum_good == true && data.data
+
 
 void AziaMaster::enqueueAzia(Azia * azia) {
     this->queue_azias.append( azia );
