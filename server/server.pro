@@ -11,9 +11,10 @@ DEPENDPATH += .
 # Input
 HEADERS += jogador.h \
     ouvinte.h \
-    roteador.h
+    roteador.h \
+    ../libs/parser.h
 SOURCES += jogador.cpp \
     main.cpp \
     ouvinte.cpp \
-    roteador.cpp
-FORMS += 
+    roteador.cpp \
+    ../libs/parser.cpp

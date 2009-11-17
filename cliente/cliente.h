@@ -8,7 +8,8 @@
 #include <QFileInfo>
 #include <QHBoxLayout>
 #include <QSignalMapper>
-
+#include <Phonon/MediaObject>
+#include <Phonon/AudioOutput>
 
 #include "../tabuleiro/tabuleiro.h"
 #include "../rede_cliente/tradutor.h"

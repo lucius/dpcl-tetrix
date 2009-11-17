@@ -174,7 +174,7 @@ void
 Tabuleiro::setAzias(int _n)
 {    
     this->azias = _n;
-    this->ui->level->display((int) _n );
+    this->ui->level->display( _n );
 }
 
 void
