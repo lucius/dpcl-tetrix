@@ -57,6 +57,9 @@ namespace Rede_Server
         recebeStart( QString _dado );
 
         void
+        recebeNovo( QString _dado );
+
+        void
         recebeOver( QString _dado );
 
         void
@@ -87,6 +90,9 @@ namespace Rede_Server
 
         unsigned int
         current_id;
+
+        bool
+        has_started;
 
     signals:
 

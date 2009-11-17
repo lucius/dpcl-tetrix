@@ -465,7 +465,7 @@ Cliente::daAziaFrenetica(QString q, QString t) {
 void
 Cliente::initTrilhaSonora()
 {
-/*    QFileInfo *musica = new QFileInfo("musicas/ken.mp3");
+    QFileInfo *musica = new QFileInfo("musicas/ken.mp3");
 
     Phonon::MediaObject *media = new Phonon::MediaObject(this);
     media->setCurrentSource(Phonon::MediaSource(musica->absoluteFilePath()));
@@ -475,7 +475,7 @@ Cliente::initTrilhaSonora()
 
     media->play();
 
-    QObject::connect(media,SIGNAL(finished()), media, SLOT(play())); */
+    QObject::connect(media,SIGNAL(finished()), media, SLOT(play()));
 }
 
 void

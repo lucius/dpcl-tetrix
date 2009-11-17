@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QStringList>
 
+#include "../libs/parser.h"
+
 Rede_Server::Roteador::Roteador( int _njogadores, QObject* _parent )
         : QObject(_parent)
 {
@@ -15,6 +17,7 @@ Rede_Server::Roteador::Roteador( int _njogadores, QObject* _parent )
     qDebug() << "Roteador: iniciado!";
 
     this->current_id = 1;
+    this->has_started = false;
 }
 
 Rede_Server::Roteador::~Roteador()
@@ -39,7 +42,6 @@ Rede_Server::Roteador::novoJogador( Jogador* _novo_jogador )
     QObject::connect(_novo_jogador,SIGNAL(erro( Jogador* )),
                      this,SLOT(jogadorCaiu(Jogador*)));
 
-    /* SERIA LEGAL MODULARIZAR TODAS AS FORMAÇÕES DE COMANDOS */
     QString
     comando_init("init:");
 
@@ -59,36 +61,52 @@ void
 Rede_Server::Roteador::recebeDado( QString _dado )
 {
     qDebug() << "Roteador::recebeDado:" << _dado;
-    QString
-    comando_str = _dado.left(4).toLower();
 
-    if ( comando_str == "enca" )
-    {
-	this->recebeEnca(_dado);
-    }
-    else if ( comando_str == "novo" )
-    {
-        quint16
-        id_jogador = this->getIdJogador(_dado);
+    Parser::Message
+    mensagem_decod = Parser::parseMessage(_dado);
 
-        this->setNomeJogador( _dado );
-        this->enviaListaJogadores( id_jogador );
-    }
-    else if ( comando_str == "star" )
+    switch( mensagem_decod )
     {
-        this->recebeStart( _dado );
-    }
-    else if ( comando_str == "over" )
-    {
-        this->recebeOver( _dado );
-    }
-    else if ( comando_str == "azia" )
-    {
+    case Parser::AZIA:
         this->recebeAzia( _dado );
-    }
-    else
-    {
+        break;
+
+    case Parser::BUTT:
         emit this->broadcast(_dado);
+        break;
+
+    case Parser::CHAT:
+        emit this->broadcast(_dado);
+        break;
+
+    case Parser::DOWN:
+        emit this->broadcast(_dado);
+        break;
+
+    case Parser::ENCA:
+        this->recebeEnca(_dado);
+        break;
+
+    case Parser::ERRO:
+        break;
+
+    case Parser::INIT:
+        break;
+
+    case Parser::NOVO:
+        this->recebeNovo( _dado );
+        break;
+
+    case Parser::OVER:
+        this->recebeOver( _dado );
+        break;
+
+    case Parser::RANK:
+        break;
+
+    case Parser::STAR:
+        this->recebeStart( _dado );
+        break;
     }
 }
 
@@ -137,6 +155,7 @@ Rede_Server::Roteador::startJogo()
     comando_start.append( this->geraNovaPeca() );
 
     emit this->broadcast(comando_start);
+    this->has_started = true;
 }
 
 void
@@ -232,22 +251,31 @@ Rede_Server::Roteador::recebeStart( QString _dado )
     bool
     esta_pronto = _dado.split(";")[1].toInt();
 
-    qDebug() << "Jogador " << _emissor->nome_jogador << " "
-             << "enviou sinal de pronto: " << esta_pronto;
-
     _emissor->estou_pronto = esta_pronto;
 
-    if ( esta_pronto && this->checkAllStart() )
+    if ( esta_pronto &&
+         this->checkAllStart() &&
+         ! this->has_started )
     {
         QString _mensagem;
 
          _mensagem = "chat:1;Todos jogadores prontos, comecando em 4 segundos";
         emit this->broadcast(_mensagem);
 
-        sleep(3);
+        sleep(2);
         qDebug() << "roteador:iniciando o jogo!";
         this->startJogo();
     }
+}
+
+void
+Rede_Server::Roteador::recebeNovo( QString _dado )
+{
+    quint16
+    id_jogador = this->getIdJogador(_dado);
+
+    this->setNomeJogador( _dado );
+    this->enviaListaJogadores( id_jogador );
 }
 
 void
